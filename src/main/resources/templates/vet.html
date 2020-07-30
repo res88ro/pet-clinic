@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+    <style>
+        input[type=text], select {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+
+        input[type=submit] {
+          width: 100%;
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+          background-color: #45a049;
+        }
+
+</style>
+</head>
+<body>
+<h1>Insert a new vet</h1>
+
+<form action="#" th:action="@{/vets/save/{id}(id=${vet.id})}" th:object="${vet}" method="post">
+
+    <label>firstName: <input type="text" th:field="*{firstName}" th:class="${#fields.hasErrors('firstName')} ? errorField" /></label>
+    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:class="errorLabel"></span>
+    <br><br>
+
+    <label>lastName: <input type="text"  th:field="*{lastName}" th:class="${#fields.hasErrors('lastName')} ? errorField" /></label>
+    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:class="errorLabel"></span>
+    <br><br>
+
+    <label>Speciality:
+        <select th:field="*{specialty}">
+            <option th:each="specialty : ${T(ro.sda.PetClinic.model.Specialty).values()}"
+                    th:value="${specialty}" th:text="${specialty}"></option>
+        </select>
+    </label>
+    <br>
+    <br/>
+
+    <input type="submit" /> <input type="reset" />
+</form>
+</body>
+</html>
