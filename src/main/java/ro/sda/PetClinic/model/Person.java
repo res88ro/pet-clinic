@@ -15,11 +15,17 @@
  */
 package ro.sda.PetClinic.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotEmpty;
 
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @MappedSuperclass
 public class Person extends BaseEntity {
 
@@ -31,20 +37,6 @@ public class Person extends BaseEntity {
 	@NotEmpty
 	private String lastName;
 
-	public String getFirstName() {
-		return this.firstName;
-	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return this.lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
 
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+
+
+</head>
+<body>
+<h1>Insert a new Pet</h1>
+
+<form action="#" th:action="@{/pets/save/{id}(id=${pet.id})}" th:object="${pet}" method="post">
+
+    <label>firstName: <input type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')} ? errorField" /></label>
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="errorLabel"></span>
+    <br><br>
+
+    <label>birthDate: <input type="date" th:field="*{birthDate}" th:class="${#fields.hasErrors('birthDate')} ? errorField" /></label>
+    <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" th:class="errorLabel"></span>
+    <br><br>
+
+
+    <label>PetType:
+        <select th:field="*{petType}">
+            <option th:each="petType : ${T(ro.sda.PetClinic.model.PetType).values()}"
+                    th:value="${petType}" th:text="${petType}"></option>
+        </select>
+    </label>
+
+
+    </label>
+    <br>
+    <br/>
+
+    <input type="submit" /> <input type="reset" />
+</form>
+</body>
+</html>

@@ -12,15 +12,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ro.sda.PetClinic.model.Owner;
 import ro.sda.PetClinic.model.Pet;
 import ro.sda.PetClinic.repository.OwnerRepository;
+import ro.sda.PetClinic.repository.PetRepository;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
 public class OwnerController {
 
     @Autowired
-    private OwnerRepository ownerRepository;
+    OwnerRepository ownerRepository;
+    @Autowired
+    PetRepository petRepository;
 
     @GetMapping("/owners")
     public String getAllOwners(Model model) {
@@ -62,6 +66,24 @@ public class OwnerController {
     @PostMapping("/owners/save")
     public String saveOwner(@Validated Owner owner, BindingResult bindingResult, Model model) {
         return saveOwner(owner, null, bindingResult, model);
+    }
+
+    @GetMapping("/owners/{id}/pets")
+    public String getPets(@PathVariable Long id, Model model) {
+
+        Owner owner = ownerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No owner found with id: " + id));
+
+        List<Pet> assignedPets = petRepository.findByOwner(owner);
+        List<Pet> unassignedPets = petRepository.findByOwner(null);
+
+        System.out.println("assignedPets: " + assignedPets);
+        System.out.println("unassignedPets: " + unassignedPets);
+
+        model.addAttribute("owner", owner);
+        model.addAttribute("assignedPets", assignedPets);
+        model.addAttribute("unassignedPets", unassignedPets);
+
+        return "assignPets";
     }
 
 }

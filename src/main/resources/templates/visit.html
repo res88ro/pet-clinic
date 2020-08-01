@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+
+
+</head>
+<body>
+<h1>Insert a new Pet</h1>
+
+<form action="#" th:action="@{/visits/save/{id}(id=${visit.id})}" th:object="${visit}" method="post">
+
+
+    <label>Visit Date: <input type="date" th:field="*{date}"
+                              th:class="${#fields.hasErrors('date')} ? errorField"/></label>
+    <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}" th:class="errorLabel"></span>
+    <br><br>
+
+
+    <label>Description: <input type="text" th:field="*{description}"
+                               th:class="${#fields.hasErrors('description')} ? errorField"/></label>
+    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:class="errorLabel"></span>
+    <br><br>
+
+    </label>
+
+
+    <input type="submit"/> <input type="reset"/>
+</form>
+</body>
+</html>

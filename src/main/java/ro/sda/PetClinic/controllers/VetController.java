@@ -20,7 +20,7 @@ import java.util.List;
 public class VetController {
 
     @Autowired
-    private VetRepository vetRepository;
+     VetRepository vetRepository;
 
     @GetMapping("/vets")
     public String getAllVets(Model model) {
@@ -41,7 +41,7 @@ public class VetController {
     public String goToEditPage(@PathVariable Long id, Model model) {
         Vet vet = vetRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No user found with id: " + id));
         model.addAttribute("vet", vet);
-        return "vets";
+        return "vet";
     }
 
     @GetMapping("/vets/vet.html")

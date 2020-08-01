@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${visit.description}"></title>
+</head>
+<body>
+<h1 th:text="${'visit: ' + {visit.description}}"></h1>
+
+<h2>Assigned Pets - remove from visit</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Birth date</th>
+        <th>Category</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pet: ${assignedPets}">
+        <td th:text="${pet.id}"></td>
+        <td th:text="${pet.name}"></td>
+        <td th:text="${pet.birthDate}"></td>
+        <td th:text="${pet.petType}"></td>
+        <td><a th:href="${'/visits/' + {visit.id} + '/pets/remove/' + {pet.id}}">Remove</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Unassigned Pets - add to owner</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pet: ${unassignedPets}">
+        <td th:text="${pet.id}"></td>
+        <td th:text="${pet.name}"></td>
+        <td th:text="${pet.birthDate}"></td>
+        <td th:text="${pet.petType}"></td>
+        <td><a th:href="${'/visits/' + {visit.id} + '/pets/assign/' + {pet.id}}">Add</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Pets</title>
+</head>
+<body>
+
+<h1>Pets List</h1>
+
+<a href="/pets/pet.html">Add a new pet</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Date of birth</th>
+        <th>Type of pet</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pet: ${allPets}">
+        <td th:text="${pet.id}"></td>
+        <td th:text="${pet.name}"></td>
+        <td th:text="${pet.birthDate}"></td>
+        <td th:text="${pet.petType}"></td>
+        <td><a th:href="@{/pets/update/{id}(id=${pet.id})}">Update</a></td>
+        <td><a th:href="@{/pets/delete/{id}(id=${pet.id})}">Delete</a></td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

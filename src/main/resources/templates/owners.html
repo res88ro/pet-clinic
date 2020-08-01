@@ -18,8 +18,7 @@
         <th>Last Name</th>
         <th>City</th>
         <th>Phone number</th>
-        <th>&nbsp;</th>
-        <th>&nbsp;</th>
+
     </tr>
     </thead>
     <tbody>
@@ -31,6 +30,9 @@
         <td th:text="${owner.telephone}"></td>
         <td><a th:href="@{/owners/update/{id}(id=${owner.id})}">Update</a></td>
         <td><a th:href="@{/owners/delete/{id}(id=${owner.id})}">Delete</a></td>
+        <td><a th:href="@{/owners/{id}/pets(id=${owner.id})}">Assign</a></td>
+
+
     </tr>
     </tbody>
 </table>

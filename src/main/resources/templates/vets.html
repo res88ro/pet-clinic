@@ -27,8 +27,8 @@
         <td th:text="${vet.firstName}"></td>
         <td th:text="${vet.lastName}"></td>
         <td th:text="${vet.specialty}"></td>
-        <!--<td><a th:href="@{/owners/update/{id}(id=${owner.id})}">Update</a></td>
-        <td><a th:href="@{/owners/delete/{id}(id=${owner.id})}">Delete</a></td>-->
+        <td><a th:href="@{/vets/update/{id}(id=${vet.id})}">Update</a></td>
+        <td><a th:href="@{/vets/delete/{id}(id=${vet.id})}">Delete</a></td>
     </tr>
     </tbody>
 </table>

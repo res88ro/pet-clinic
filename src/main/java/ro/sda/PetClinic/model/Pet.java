@@ -15,16 +15,19 @@
  */
 package ro.sda.PetClinic.model;
 
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
-
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.*;
 
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "pets")
 public class Pet extends NamedEntity {
@@ -33,61 +36,18 @@ public class Pet extends NamedEntity {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthDate;
 
-	@ManyToOne
-	@JoinColumn(name = "type_id")
-	private PetType type;
+	@Column
+	@Enumerated(EnumType.STRING)
+	private PetType petType;
 
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
 	private Owner owner;
 
-	@Transient
-	private Set<Visit> visits = new LinkedHashSet<>();
+	@ManyToOne
+	@JoinColumn(name = "visit_id")
+	private Visit visit;
 
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-	}
 
-	public LocalDate getBirthDate() {
-		return this.birthDate;
-	}
-
-	public PetType getType() {
-		return this.type;
-	}
-
-	public void setType(PetType type) {
-		this.type = type;
-	}
-
-	public Owner getOwner() {
-		return this.owner;
-	}
-
-	protected void setOwner(Owner owner) {
-		this.owner = owner;
-	}
-
-	protected Set<Visit> getVisitsInternal() {
-		if (this.visits == null) {
-			this.visits = new HashSet<>();
-		}
-		return this.visits;
-	}
-
-	protected void setVisitsInternal(Collection<Visit> visits) {
-		this.visits = new LinkedHashSet<>(visits);
-	}
-
-	public List<Visit> getVisits() {
-		List<Visit> sortedVisits = new ArrayList<>(getVisitsInternal());
-		PropertyComparator.sort(sortedVisits, new MutableSortDefinition("date", false, false));
-		return Collections.unmodifiableList(sortedVisits);
-	}
-
-	public void addVisit(Visit visit) {
-		getVisitsInternal().add(visit);
-		visit.setPetId(this.getId());
-	}
 
 }

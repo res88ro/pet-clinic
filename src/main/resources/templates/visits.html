@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Visits</title>
+</head>
+<body>
+
+<h1>Visits List</h1>
+
+<a href="/visits/visit.html">Add a new pet</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Visite date</th>
+        <th>Description</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="visit: ${allVisits}">
+        <td th:text="${visit.id}"></td>
+        <td th:text="${visit.date}"></td>
+        <td th:text="${visit.description}"></td>
+        <td><a th:href="@{/visits/update/{id}(id=${visit.id})}">Update</a></td>
+        <td><a th:href="@{/visits/delete/{id}(id=${visit.id})}">Delete</a></td>
+        <td><a th:href="@{/visits/{id}/pets(id=${visit.id})}">Assign</a></td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

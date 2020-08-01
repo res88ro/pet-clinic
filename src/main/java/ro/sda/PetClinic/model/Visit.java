@@ -1,73 +1,84 @@
-/*
- * Copyright 2012-2019 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package ro.sda.PetClinic.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "visits")
 public class Visit extends BaseEntity {
 
-	@Column(name = "visit_date")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate date;
+    @Column(name = "visit_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
 
-	@NotEmpty
-	@Column(name = "description")
-	private String description;
+    @NotEmpty
+    @Column(name = "description")
+    private String description;
 
-	@Column(name = "pet_id")
-	private Long petId;
+    @Column(name = "pet_id")
+    private Long petId;
 
-	/**
-	 * Creates a new instance of Visit for the current date
-	 */
-	public Visit() {
-		this.date = LocalDate.now();
-	}
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private Set<Pet> pets;
 
-	public LocalDate getDate() {
-		return this.date;
-	}
 
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
+    protected Set<Pet> getPetsInternal() {
+        if (this.pets == null) {
+            this.pets = new HashSet<>();
+        }
+        return this.pets;
+    }
 
-	public String getDescription() {
-		return this.description;
-	}
+    protected void setPetsInternal(Set<Pet> pets) {
+        this.pets = pets;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public List<Pet> getPets() {
+        List<Pet> sortedPets = new ArrayList<>();
+        return sortedPets;
+    }
 
-	public Long getPetId() {
-		return this.petId;
-	}
+    public void addPet(Pet pet) {
+        if (pet.isNew()) {
+            getPetsInternal().add(pet);
+        }
+        pet.setVisit(this);
+    }
 
-	public void setPetId(Long petId) {
-		this.petId = petId;
-	}
+
+    public Pet getPet(String name) {
+        return getPet(name, false);
+    }
+
+
+    public Pet getPet(String name, boolean ignoreNew) {
+        name = name.toLowerCase();
+        for (Pet pet : getPetsInternal()) {
+            if (!ignoreNew || !pet.isNew()) {
+                String compName = pet.getName();
+                compName = compName.toLowerCase();
+                if (compName.equals(name)) {
+                    return pet;
+                }
+            }
+        }
+        return null;
+    }
+
+
 
 }

@@ -15,18 +15,20 @@
  */
 package ro.sda.PetClinic.model;
 
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
-import org.springframework.core.style.ToStringCreator;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import java.util.*;
 
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "owners")
+
 public class Owner extends Person {
 
 
@@ -37,29 +39,11 @@ public class Owner extends Person {
 
 	@Column(name = "telephone")
 	@NotEmpty
-	/*@Digits(fraction = 0, integer = 10)*/
 	private String telephone;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
 	private Set<Pet> pets;
 
-
-
-	public String getCity() {
-		return this.city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getTelephone() {
-		return this.telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
 
 	protected Set<Pet> getPetsInternal() {
 		if (this.pets == null) {
@@ -73,9 +57,8 @@ public class Owner extends Person {
 	}
 
 	public List<Pet> getPets() {
-		List<Pet> sortedPets = new ArrayList<>(getPetsInternal());
-		PropertyComparator.sort(sortedPets, new MutableSortDefinition("name", true, true));
-		return Collections.unmodifiableList(sortedPets);
+		List<Pet> sortedPets = new ArrayList<>();
+		return sortedPets;
 	}
 
 	public void addPet(Pet pet) {
@@ -105,13 +88,5 @@ public class Owner extends Person {
 		return null;
 	}
 
-	@Override
-	public String toString() {
-		return new ToStringCreator(this)
-
-				.append("id", this.getId()).append("new", this.isNew()).append("lastName", this.getLastName())
-				.append("firstName", this.getFirstName()).append("city", this.city)
-				.append("telephone", this.telephone).toString();
-	}
 
 }
