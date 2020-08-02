@@ -26,13 +26,15 @@ public class OwnerController {
     @Autowired
     PetRepository petRepository;
 
-    @GetMapping("/owners")
+    @GetMapping("owners")
     public String getAllOwners(Model model) {
         Iterable<Owner> allOwners = ownerRepository.findAll();
         System.out.println(allOwners);
         model.addAttribute("allOwners", allOwners);
         return "owners";
     }
+
+
 
     @GetMapping("/owners/delete/{id}")
     public String deleteUser(@PathVariable Long id) {

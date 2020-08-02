@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Owners</title>
+    <title>Title</title>
     <style>
         .navbar .nav-item:not(:last-child) {
   margin-right: 35px;
@@ -17,6 +17,7 @@
 }
 
     </style>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -87,36 +88,21 @@
     </div>
 </nav>
 
-<h1>Owners List</h1>
-
-<a href="/owners/owner.html">Add a new owner</a>
-
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>City</th>
-        <th>Phone number</th>
-
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="owner: ${allOwners}">
-        <td th:text="${owner.id}"></td>
-        <td th:text="${owner.firstName}"></td>
-        <td th:text="${owner.lastName}"></td>
-        <td th:text="${owner.city}"></td>
-        <td th:text="${owner.telephone}"></td>
-        <td><a th:href="@{/owners/update/{id}(id=${owner.id})}">Update</a></td>
-        <td><a th:href="@{/owners/delete/{id}(id=${owner.id})}">Delete</a></td>
-        <td><a th:href="@{/owners/{id}/pets(id=${owner.id})}">Assign</a></td>
+<div class="container" >
+    <img th:src="@{/images/stomatologie2.jpg}" class="img-fluid" alt="stomatolgie2.jpg" align="center" width="500px"
+         height="200px">
 
 
-    </tr>
-    </tbody>
-</table>
+
+    <p> Cabinetul medical veterinar WeLovePets e unul din putinele cabinete veterinare ce
+        realizeaza servicii stomatologice pentru animalele de companie ca:</p>
+    <ul class="list-group">
+        <li class="list-group-item"> extractii dentare</li>
+        <li class="list-group-item"> detartraj ultrasunete</li>
+        <li class="list-group-item"> extirpare tumori gingivale</li>
+        <li class="list-group-item"> extirpare chist glanda salivara submandibulara</li>
+    </ul>
+</div>
 
 
 </body>

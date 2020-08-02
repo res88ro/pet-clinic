@@ -93,10 +93,10 @@ public class PetController {
 
 
 
-    @GetMapping("/visits/{visitId}/pets/remove/{petsId}")
+    @GetMapping("/visits/{visitId}/pets/remove/{petId}")
     public String removePetFromVisit(@PathVariable Long visitId, @PathVariable Long petId) {
         Pet pet = petRepository.findById(petId).orElseThrow(() -> new IllegalArgumentException("No student found with id: " + petId));
-        pet.setId(null);
+        pet.setVisit(null);
         petRepository.save(pet);
         return "redirect:/visits/" + visitId + "/pets";
     }
