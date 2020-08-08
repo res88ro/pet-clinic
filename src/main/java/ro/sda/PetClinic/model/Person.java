@@ -30,11 +30,11 @@ import javax.validation.constraints.NotEmpty;
 public class Person extends BaseEntity {
 
 	@Column(name = "first_name")
-	@NotEmpty
+	@NotEmpty(message = "Va rugam introduceti numele")
 	private String firstName;
 
 	@Column(name = "last_name")
-	@NotEmpty
+	@NotEmpty(message = "Va rugam introduceti prenumele")
 	private String lastName;
 
 

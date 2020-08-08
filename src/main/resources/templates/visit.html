@@ -18,6 +18,8 @@
 
 
 
+
+
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -37,7 +39,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img class="logo horizontal-logo" th:src="@{/images/welovepets.png}" alt="pet-clinic" width="250" height="60">
+            <img class="logo horizontal-logo" th:src="@{/images/welovepets.png}" alt="pet-clinic" width="250"
+                 height="60">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,14 +98,14 @@
     <form action="#" th:action="@{/visits/save/{id}(id=${visit.id})}" th:object="${visit}" method="post">
         <div class="form-group">
 
-            <label class="form-control">>Data programare: <input type="date" th:field="*{date}"
-                                                                 th:class="${#fields.hasErrors('date')} ? errorField"/></label>
+            <label class="form-control">Data programare: <input type="date" th:field="*{date}"
+                                                                th:class="${#fields.hasErrors('date')} ? errorField"/></label>
             <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}" th:class="errorLabel"></span>
         </div>
 
         <div class="form-group">
-            <label class="form-control">>Descriere: <input type="text" th:field="*{description}"
-                                                           th:class="${#fields.hasErrors('description')} ? errorField"/></label>
+            <label class="form-control">Descriere: <input type="text" th:field="*{description}"
+                                                          th:class="${#fields.hasErrors('description')} ? errorField"/></label>
             <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:class="errorLabel"></span>
         </div>
 

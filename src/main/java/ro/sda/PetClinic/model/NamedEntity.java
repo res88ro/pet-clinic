@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 @AllArgsConstructor
@@ -29,6 +30,8 @@ import javax.persistence.MappedSuperclass;
 public class NamedEntity extends BaseEntity {
 
 	@Column(name = "name")
+	@NotEmpty(message = "Va rugam sa introduceti numele")
+
 	private String name;
 
 }

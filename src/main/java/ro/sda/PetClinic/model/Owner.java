@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.*;
 
 @Data
@@ -34,11 +35,11 @@ public class Owner extends Person {
 
 
 	@Column(name = "city")
-	@NotEmpty
 	private String city;
 
 	@Column(name = "telephone")
-	@NotEmpty
+	@NotEmpty(message = "Va rugam sa introduceti un numar de telefon pentru a fi contactat")
+	@Pattern(regexp ="^[0-9]{10}$" , message = "Va rugam sa introduceti un numar de telefon de 10 cifre")
 	private String telephone;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")

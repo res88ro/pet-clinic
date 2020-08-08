@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Owners</title>
+    <title>Clienti</title>
     <style>
         .navbar .nav-item:not(:last-child) {
   margin-right: 35px;
@@ -15,6 +15,8 @@
 .show.dropdown .dropdown-toggle::after {
   transform: translateY(3px);
 }
+
+
 
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -33,7 +35,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img class="logo horizontal-logo" th:src="@{/images/welovepets.png}" alt="pet-clinic" width="250" height="60">
+            <img class="logo horizontal-logo" th:src="@{/images/welovepets.png}" alt="pet-clinic" width="250"
+                 height="60">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,37 +90,38 @@
     </div>
 </nav>
 
-<h1>Owners List</h1>
+<h1 align="center">Lista clienti</h1>
+<div class="container" align="center">
+    <a href="/owners/owner.html">Adauga un nou client</a>
+</div>
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="row">ID</th>
+            <th scope="row">Nume</th>
+            <th scope="row">Prenume</th>
+            <th scope="row">Oras</th>
+            <th scope="row">Numar telefon</th>
 
-<a href="/owners/owner.html">Add a new owner</a>
-
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>City</th>
-        <th>Phone number</th>
-
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="owner: ${allOwners}">
-        <td th:text="${owner.id}"></td>
-        <td th:text="${owner.firstName}"></td>
-        <td th:text="${owner.lastName}"></td>
-        <td th:text="${owner.city}"></td>
-        <td th:text="${owner.telephone}"></td>
-        <td><a th:href="@{/owners/update/{id}(id=${owner.id})}">Update</a></td>
-        <td><a th:href="@{/owners/delete/{id}(id=${owner.id})}">Delete</a></td>
-        <td><a th:href="@{/owners/{id}/pets(id=${owner.id})}">Assign</a></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="owner: ${allOwners}">
+            <td th:text="${owner.id}"></td>
+            <td th:text="${owner.firstName}"></td>
+            <td th:text="${owner.lastName}"></td>
+            <td th:text="${owner.city}"></td>
+            <td th:text="${owner.telephone}"></td>
+            <td><a th:href="@{/owners/update/{id}(id=${owner.id})}">Actualizeaza</a></td>
+            <td><a th:href="@{/owners/delete/{id}(id=${owner.id})}">Sterge</a></td>
+            <td><a th:href="@{/owners/{id}/pets(id=${owner.id})}">Alege pet</a></td>
 
 
-    </tr>
-    </tbody>
-</table>
-
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

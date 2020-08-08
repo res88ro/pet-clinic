@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Pets</title>
+    <title>Animale de companie</title>
     <style>
         .navbar .nav-item:not(:last-child) {
   margin-right: 35px;
@@ -15,6 +15,8 @@
 .show.dropdown .dropdown-toggle::after {
   transform: translateY(3px);
 }
+
+
 
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -33,7 +35,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img class="logo horizontal-logo" th:src="@{/images/welovepets.png}" alt="pet-clinic" width="250" height="60">
+            <img class="logo horizontal-logo" th:src="@{/images/welovepets.png}" alt="pet-clinic" width="250"
+                 height="60">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,34 +90,35 @@
     </div>
 </nav>
 
-<h1>Pets List</h1>
+<h1 align="center">Lista animale de companie</h1>
+<div class="container" align="center">
+    <a href="/pets/pet.html">Adauga un nou animal de companie</a>
+</div>
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="row">ID</th>
+            <th scope="row">Nume</th>
+            <th scope="row">Data nasterii</th>
+            <th scope="row">Categotie animal</th>
 
-<a href="/pets/pet.html">Add a new pet</a>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pet: ${allPets}">
+            <td th:text="${pet.id}"></td>
+            <td th:text="${pet.name}"></td>
+            <td th:text="${pet.birthDate}"></td>
+            <td th:text="${pet.petType}"></td>
+            <td><a th:href="@{/pets/update/{id}(id=${pet.id})}">Actualizeaza</a></td>
+            <td><a th:href="@{/pets/delete/{id}(id=${pet.id})}">Sterge</a></td>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Date of birth</th>
-        <th>Type of pet</th>
-        <th>&nbsp;</th>
-        <th>&nbsp;</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="pet: ${allPets}">
-        <td th:text="${pet.id}"></td>
-        <td th:text="${pet.name}"></td>
-        <td th:text="${pet.birthDate}"></td>
-        <td th:text="${pet.petType}"></td>
-        <td><a th:href="@{/pets/update/{id}(id=${pet.id})}">Update</a></td>
-        <td><a th:href="@{/pets/delete/{id}(id=${pet.id})}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
 
-    </tr>
-    </tbody>
-</table>
-
-
+</div>
 </body>
 </html>
+

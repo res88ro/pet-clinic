@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Add User</title>
+    <title>Adauga client</title>
     <style>
         .navbar .nav-item:not(:last-child) {
   margin-right: 35px;
@@ -15,6 +15,8 @@
 .show.dropdown .dropdown-toggle::after {
   transform: translateY(3px);
 }
+
+
 
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -30,28 +32,35 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>Insert a new owner</h1>
+<h1 align="center">Adauga un client nou</h1>
 
 <form action="#" th:action="@{/owners/save/{id}(id=${owner.id})}" th:object="${owner}" method="post">
 
-    <label>first_name: <input type="text" th:field="*{firstName}" th:class="${#fields.hasErrors('firstName')} ? errorField" /></label>
-    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:class="errorLabel"></span>
-    <br><br>
+    <div class="form-group">
 
-    <label>last_name: <input type="text"  th:field="*{lastName}" th:class="${#fields.hasErrors('lastName')} ? errorField" /></label>
-    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:class="errorLabel"></span>
-    <br><br>
-
-    <label>city: <input type="text"  th:field="*{city}" th:class="${#fields.hasErrors('city')} ? errorField" /></label>
-    <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" th:class="errorLabel"></span>
-    <br><br>
-
-    <label>telephone: <input type="text"  th:field="*{telephone}" th:class="${#fields.hasErrors('telephone')} ? errorField" /></label>
-    <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}" th:class="errorLabel"></span>
-    <br><br>
+        <label class="form-control">Nume: <input type="text" th:field="*{firstName}"
+                                                       th:class="${#fields.hasErrors('firstName')} ? errorField"/></label>
+        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:class="errorLabel"></span>
 
 
-    <input type="submit" /> <input type="reset" />
+        <label class="form-control">Prenume: <input type="text" th:field="*{lastName}"
+                                 th:class="${#fields.hasErrors('lastName')} ? errorField"/></label>
+        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:class="errorLabel"></span>
+
+
+        <label class="form-control">Oras: <input type="text" th:field="*{city}"
+                            th:class="${#fields.hasErrors('city')} ? errorField"/></label>
+        <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" th:class="errorLabel"></span>
+
+        <label class="form-control">Numar telefon: <input type="text" th:field="*{telephone}"
+                                 th:class="${#fields.hasErrors('telephone')} ? errorField"/></label>
+        <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}" th:class="errorLabel"></span>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salveaza</button>
+    <button type="reset" class="btn btn-warning">Reset</button>
 </form>
+</div>
 </body>
 </html>

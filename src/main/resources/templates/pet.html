@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Add User</title>
+    <title>Adauga animal de companie</title>
     <style>
         .navbar .nav-item:not(:last-child) {
   margin-right: 35px;
@@ -15,6 +15,8 @@
 .show.dropdown .dropdown-toggle::after {
   transform: translateY(3px);
 }
+
+
 
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -31,32 +33,36 @@
 
 </head>
 <body>
-<h1>Insert a new Pet</h1>
+<h1 align="center">Adauga un nou animal de companie</h1>
 
 <form action="#" th:action="@{/pets/save/{id}(id=${pet.id})}" th:object="${pet}" method="post">
 
-    <label>firstName: <input type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')} ? errorField" /></label>
-    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="errorLabel"></span>
-    <br><br>
-
-    <label>birthDate: <input type="date" th:field="*{birthDate}" th:class="${#fields.hasErrors('birthDate')} ? errorField" /></label>
-    <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" th:class="errorLabel"></span>
-    <br><br>
-
-
-    <label>PetType:
-        <select th:field="*{petType}">
-            <option th:each="petType : ${T(ro.sda.PetClinic.model.PetType).values()}"
-                    th:value="${petType}" th:text="${petType}"></option>
-        </select>
     </label>
+    <div class="form-group">
+
+        <label class="form-control">Nume: <input type="text" th:field="*{name}"
+                                                      th:class="${#fields.hasErrors('name')} ? errorField"/></label>
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="errorLabel"></span>
 
 
-    </label>
-    <br>
-    <br/>
+        <label class="form-control">Data nasterii: <input type="date" th:field="*{birthDate}"
+                                                      th:class="${#fields.hasErrors('birthDate')} ? errorField"/></label>
+        <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" th:class="errorLabel"></span>
 
-    <input type="submit" /> <input type="reset" />
+
+        <label class="form-control">Categorie animal de companie:
+            <select th:field="*{petType}">
+                <option th:each="petType : ${T(ro.sda.PetClinic.model.PetType).values()}"
+                        th:value="${petType}" th:text="${petType}"></option>
+            </select>
+        </label>
+
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Salveaza</button>
+    <button type="reset" class="btn btn-warning">Reset</button>
 </form>
+</div>
 </body>
 </html>

@@ -25,10 +25,13 @@ public class Visit extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
-    @NotEmpty
+
+
+    @NotEmpty(message = "Pentru ce anume doriti sa faceti programarea?")
     @Column(name = "description")
     private String description;
 
+    @NotEmpty(message = "Cand anume doriti sa faceti programarea?")
     @Column(name = "pet_id")
     private Long petId;
 

@@ -4,7 +4,7 @@ package ro.sda.PetClinic.model;
 
 public enum  Specialty {
 
-    GENERAL,SURGERY
+    GENERAL,SURGERY,INGRIJIRE
 
 
 }

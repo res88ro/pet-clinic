@@ -16,6 +16,8 @@
   transform: translateY(3px);
 }
 
+
+
     </style>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -34,7 +36,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img class="logo horizontal-logo" th:src="@{/images/welovepets.png}" alt="pet-clinic" width="250" height="60">
+            <img class="logo horizontal-logo" th:src="@{/images/welovepets.png}" alt="pet-clinic" width="250"
+                 height="60">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,51 +90,58 @@
         </div>
     </div>
 </nav>
-<h1 th:text="${'Owner: ' + {owner.firstName}}"></h1>
+<h1 th:text="${'Client: ' + {owner.firstName}}" align="center"></h1>
+<div class="container" align="center">
+    <h2 align="center">Animalele de companie ale clientului</h2>
+    <div class="container" align="center">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="row">ID</th>
+                <th scope="row">Nume</th>
+                <th scope="row">Data nasterii</th>
+                <th scope="row">Categorie</th>
 
-<h2>Assigned Pets - remove from owner</h2>
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Birth date</th>
-        <th>Category</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pet: ${assignedPets}">
+                <td th:text="${pet.id}"></td>
+                <td th:text="${pet.name}"></td>
+                <td th:text="${pet.birthDate}"></td>
+                <td th:text="${pet.petType}"></td>
+                <td><a th:href="${'/owners/' + {owner.id} +
+         '/pets/remove/' + {pet.id}}">Sterge</a></td>
 
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="pet: ${assignedPets}">
-        <td th:text="${pet.id}"></td>
-        <td th:text="${pet.name}"></td>
-        <td th:text="${pet.birthDate}"></td>
-        <td th:text="${pet.petType}"></td>
-        <td><a th:href="${'/owners/' + {owner.id} +
-         '/pets/remove/' + {pet.id}}">Remove</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-    </tr>
-    </tbody>
-</table>
+    <h2 align="center">Animalele de companie fara client</h2>
+    <div class="container" align="center">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="row">ID</th>
+                <th scope="row">Nume</th>
+                <th scope="row">Data nasterii</th>
+                <th scope="row">Categorie</th>
 
-<h2>Unassigned Pets - add to owner</h2>
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>&nbsp;</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="pet: ${unassignedPets}">
-        <td th:text="${pet.id}"></td>
-        <td th:text="${pet.name}"></td>
-        <td th:text="${pet.birthDate}"></td>
-        <td th:text="${pet.petType}"></td>
-        <td><a th:href="${'/owners/' + {owner.id} + '/pets/assign/' + {pet.id}}">Add</a></td>
-    </tr>
-    </tbody>
-</table>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="pet: ${unassignedPets}">
+                <td th:text="${pet.id}"></td>
+                <td th:text="${pet.name}"></td>
+                <td th:text="${pet.birthDate}"></td>
+                <td th:text="${pet.petType}"></td>
+                <td><a th:href="${'/owners/' + {owner.id} + '/pets/assign/' + {pet.id}}">Adauga</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>
